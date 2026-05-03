@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,7 @@
   <title>Andrea's Arangettam · Bharatanatyam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&family=Noto+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&family=Noto+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
   <style>
   /* ═══════════════════════════════════════════════════════
@@ -200,11 +199,12 @@
   }
 
   .nav-brand {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-style: italic;
+    font-family: 'Outfit', var(--font-body), sans-serif;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 600;
     color: var(--gold-pale);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
   }
   .nav-brand span { color: var(--gold-light); font-style: normal; font-weight: 600; }
 
@@ -304,9 +304,9 @@
     inset: 0;
     background: linear-gradient(
       170deg,
-      rgba(30, 5, 12, 0.80) 0%,
-      rgba(44, 8, 18, 0.55) 35%,
-      rgba(30, 5, 12, 0.88) 100%
+      rgba(20, 5, 35, 0.82) 0%,
+      rgba(45, 18, 72, 0.52) 35%,
+      rgba(20, 5, 35, 0.88) 100%
     );
   }
 
@@ -437,9 +437,9 @@
     content: '';
     position: absolute;
     inset: -12px -12px 12px 12px;
-    border: 1.5px solid var(--gold);
+    border: 1.5px solid var(--plum-pale);
     border-radius: var(--radius);
-    opacity: 0.5;
+    opacity: 0.4;
     pointer-events: none;
   }
   .about-img {
@@ -873,27 +873,78 @@
   ═══════════════════════════════════════════════════════ */
   #rsvp {
     padding: var(--section-pad) 0;
-    background: var(--ivory-warm);
+    background: #3B1A4A;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
   }
+  /* Plum base layer */
   #rsvp::before {
     content: '';
     position: absolute;
-    top: -100px; right: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,146,42,0.08) 0%, transparent 70%);
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(120,60,160,0.5) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 80% at 80% 70%, rgba(80,20,100,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(160,80,200,0.2) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 0;
   }
+  /* Animated smoke wisps */
   #rsvp::after {
     content: '';
     position: absolute;
-    bottom: -100px; left: -100px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(107,26,42,0.07) 0%, transparent 70%);
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 40% 30% at 15% 80%, rgba(200,160,230,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 35% 25% at 85% 20%, rgba(180,120,220,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 60% 60%, rgba(140,80,190,0.08) 0%, transparent 80%);
     pointer-events: none;
+    z-index: 0;
+    animation: smokeDrift 12s ease-in-out infinite alternate;
+  }
+  /* Smoke orb elements via rsvp-box siblings */
+  .rsvp-smoke {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(60px);
+    z-index: 0;
+  }
+  .rsvp-smoke-1 {
+    width: 500px; height: 500px;
+    top: -120px; left: -150px;
+    background: radial-gradient(circle, rgba(160,80,210,0.35) 0%, transparent 70%);
+    animation: smokeFloat1 14s ease-in-out infinite alternate;
+  }
+  .rsvp-smoke-2 {
+    width: 600px; height: 400px;
+    bottom: -100px; right: -160px;
+    background: radial-gradient(circle, rgba(100,40,160,0.4) 0%, transparent 70%);
+    animation: smokeFloat2 18s ease-in-out infinite alternate;
+  }
+  .rsvp-smoke-3 {
+    width: 300px; height: 300px;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(220,180,255,0.08) 0%, transparent 70%);
+    animation: smokeFloat3 10s ease-in-out infinite alternate;
+  }
+  @keyframes smokeDrift {
+    0%   { opacity: 0.6; transform: scale(1) translateY(0); }
+    100% { opacity: 1;   transform: scale(1.08) translateY(-12px); }
+  }
+  @keyframes smokeFloat1 {
+    0%   { transform: translate(-10px, 0px) scale(1);    opacity: 0.7; }
+    100% { transform: translate(20px, -30px) scale(1.1); opacity: 1; }
+  }
+  @keyframes smokeFloat2 {
+    0%   { transform: translate(0, 0) scale(1);      opacity: 0.6; }
+    100% { transform: translate(-25px, 20px) scale(1.12); opacity: 0.9; }
+  }
+  @keyframes smokeFloat3 {
+    0%   { transform: translate(-50%,-50%) scale(1);    opacity: 0.5; }
+    100% { transform: translate(-50%,-60%) scale(1.15); opacity: 0.8; }
   }
 
   .rsvp-box {
@@ -1025,6 +1076,733 @@
     0%, 100% { transform: scale(1); }
     50%       { transform: scale(1.07); }
   }
+  
+  /* ═══════════════════════════════════════════════════════
+     MODERN HERO RSVP + COUNTDOWN
+  ═══════════════════════════════════════════════════════ */
+
+  /* Countdown */
+  .hero-countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 1s 0.78s both;
+  }
+  .cdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    min-width: 64px;
+    backdrop-filter: blur(8px);
+  }
+  .cdown-num {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 600;
+    color: var(--gold-pale);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .cdown-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,233,192,0.55);
+    margin-top: 0.3rem;
+    font-weight: 600;
+  }
+  .cdown-sep {
+    font-size: 1.4rem;
+    color: var(--gold);
+    font-weight: 300;
+    padding-bottom: 0.8rem;
+    opacity: 0.7;
+  }
+
+  /* Big RSVP button */
+  .btn-rsvp-hero {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.15rem 3rem;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+    color: var(--maroon-deep);
+    border-radius: 60px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 8px 40px rgba(200,146,42,0.55), 0 0 0 0 rgba(200,146,42,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeUp 1s 0.9s both, rsvpPulse 2.8s 2s ease-in-out infinite;
+  }
+  .btn-rsvp-hero:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 50px rgba(200,146,42,0.65), 0 0 0 0 rgba(200,146,42,0);
+    animation: none;
+  }
+  /* Ping ring around RSVP button */
+  .btn-rsvp-ping {
+    position: absolute;
+    inset: -6px;
+    border-radius: 60px;
+    border: 2px solid rgba(200,146,42,0.5);
+    animation: pingRing 2.5s ease-out infinite;
+    pointer-events: none;
+  }
+  .btn-rsvp-text { position: relative; }
+
+  .hero-rsvp-note {
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,233,192,0.55);
+    font-family: var(--font-body);
+    animation: fadeUp 1s 1.05s both;
+  }
+
+  @keyframes rsvpPulse {
+    0%, 100% { box-shadow: 0 8px 40px rgba(200,146,42,0.55), 0 0 0 0 rgba(200,146,42,0.4); }
+    50%       { box-shadow: 0 8px 40px rgba(200,146,42,0.55), 0 0 0 14px rgba(200,146,42,0); }
+  }
+  @keyframes pingRing {
+    0%   { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.22); opacity: 0; }
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     MODERN DESIGN ELEMENTS
+  ═══════════════════════════════════════════════════════ */
+
+  /* Floating RSVP chip — appears after scrolling past hero */
+  #rsvp-chip {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: var(--maroon-deep);
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 28px rgba(200,146,42,0.5);
+    cursor: pointer;
+    text-decoration: none;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s, box-shadow 0.2s;
+  }
+  #rsvp-chip.visible { transform: translateY(0); opacity: 1; }
+  #rsvp-chip:hover { box-shadow: 0 10px 36px rgba(200,146,42,0.65); transform: translateY(-2px); }
+  #rsvp-chip svg { flex-shrink: 0; }
+  @media (max-width: 480px) {
+    #rsvp-chip { bottom: 1rem; right: 1rem; padding: 0.65rem 1.1rem; font-size: 0.72rem; }
+  }
+
+  /* Section background alternator — modern glass-feel stat bar */
+  .stats-bar {
+    background: var(--maroon-deep);
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+  }
+  .stats-bar-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    flex: 1;
+    min-width: 140px;
+    max-width: 220px;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    position: relative;
+  }
+  .stat-item + .stat-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 20%; height: 60%;
+    width: 1px;
+    background: rgba(200,146,42,0.25);
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,233,192,0.45);
+    font-weight: 600;
+  }
+
+  /* ── Gallery CTA card ── */
+  #gallery { background: var(--maroon-deep); }
+  #gallery .eyebrow { color: var(--gold-light); }
+  #gallery .section-title { color: var(--gold-pale); }
+  #gallery .ornament-line { background: linear-gradient(90deg, transparent, var(--gold-light)); }
+  #gallery .ornament-line.r { background: linear-gradient(90deg, var(--gold-light), transparent); }
+  #gallery .ornament-diamond { background: var(--gold-light); }
+
+  .gallery-cta-card {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+  .gallery-cta-inner {
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 16px;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3.5rem);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .gallery-cta-inner::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,146,42,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .gallery-cta-inner:hover {
+    border-color: rgba(200,146,42,0.6);
+    background: rgba(255,255,255,0.06);
+  }
+  .gallery-cta-icon { margin-bottom: 1.5rem; opacity: 0.9; }
+  .gallery-cta-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+  }
+  .gallery-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    font-weight: 500;
+    color: var(--gold-pale);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .gallery-cta-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(245,233,192,0.6);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .gallery-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2.5rem;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: var(--maroon-deep);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 6px 24px rgba(200,146,42,0.4);
+  }
+  .gallery-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(200,146,42,0.55);
+  }
+  .gallery-cta-note {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,233,192,0.3);
+    font-style: italic;
+  }
+
+  /* ── Modern section transitions ── */
+  .section-wave {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .section-wave svg { display: block; width: 100%; }
+
+  /* ── Tagline marquee strip ── */
+  .marquee-strip {
+    background: var(--gold);
+    padding: 0.65rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-track span {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--maroon-deep);
+    padding: 0 2.5rem;
+  }
+  .marquee-track span.dot {
+    color: var(--maroon-soft);
+    padding: 0;
+    letter-spacing: 0;
+    font-size: 0.5rem;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Modern glassmorphic nav on scroll ── */
+  #navbar.scrolled {
+    background: rgba(28, 6, 14, 0.97);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    border-bottom-color: rgba(200,146,42,0.3);
+  }
+
+  /* ── About section modern tweak: gradient border on image ── */
+  .about-image-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    box-shadow: inset 0 0 0 1px rgba(200,146,42,0.2);
+    pointer-events: none;
+  }
+
+  /* ── Person card photo shimmer on hover ── */
+  .person-image-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .person-image-inner:hover::after { transform: translateX(100%); }
+
+  /* ── RSVP section redesign — plum + smoke ── */
+  .rsvp-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(220,180,255,0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 24px 80px rgba(60,10,80,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    position: relative;
+    z-index: 1;
+  }
+  #rsvp .section-title { color: #F0E0FF; }
+  #rsvp .eyebrow { color: #D4A8F0; }
+  #rsvp .section-line { background: linear-gradient(90deg, transparent, #C89AE8, transparent); }
+  #rsvp .ornament-line { background: linear-gradient(90deg, transparent, #C89AE8); }
+  #rsvp .ornament-line.r { background: linear-gradient(90deg, #C89AE8, transparent); }
+  #rsvp .ornament-diamond { background: #C89AE8; }
+  .rsvp-text { color: rgba(240,224,255,0.65); }
+  .rsvp-deadline { color: rgba(240,224,255,0.35); }
+  .rsvp-decorative { filter: drop-shadow(0 0 12px rgba(200,150,255,0.5)); }
+
+  
+  /* ═══════════════════════════════════════════════════════
+     GLOBAL PLUM THEME OVERRIDE
+  ═══════════════════════════════════════════════════════ */
+
+  /* Plum palette additions */
+  :root {
+    --plum-deep:    #1E0A2E;
+    --plum-dark:    #2D1245;
+    --plum-mid:     #3B1A4A;
+    --plum-soft:    #5A2D72;
+    --plum-light:   #7B4A9E;
+    --plum-mist:    #9B6DBF;
+    --plum-pale:    #D4A8F0;
+    --plum-dust:    #F0E0FF;
+    --smoke-1:      rgba(160,80,210,0.28);
+    --smoke-2:      rgba(100,40,160,0.32);
+    --smoke-3:      rgba(220,180,255,0.07);
+    --smoke-4:      rgba(120,60,160,0.2);
+  }
+
+  /* Body background */
+  body {
+    background: var(--plum-deep);
+    color: var(--plum-dust);
+  }
+
+  /* ── Nav bar ── */
+  #navbar {
+    background: rgba(30, 10, 46, 0.92);
+    border-bottom-color: rgba(180,130,230,0.2);
+  }
+  #navbar.scrolled {
+    background: rgba(18, 6, 30, 0.98);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+    border-bottom-color: rgba(180,130,230,0.25);
+  }
+  .nav-brand { color: var(--plum-pale); }
+  .nav-brand span { color: var(--gold-light); }
+  .nav-links a { color: rgba(212,168,240,0.7); }
+  .nav-links a:hover { color: var(--plum-pale); }
+  .hamburger span { background: var(--plum-pale); }
+  .nav-drawer {
+    background: rgba(20, 6, 32, 0.98);
+    border-bottom-color: rgba(180,130,230,0.15);
+  }
+  .nav-drawer ul li a { color: var(--plum-dust); border-bottom-color: rgba(180,130,230,0.1); }
+
+  /* ── Section defaults ── */
+  #about, #guru, #thanks {
+    background: var(--plum-dark);
+    position: relative;
+    overflow: hidden;
+  }
+  #shishya {
+    background: var(--plum-deep);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    background: var(--plum-mid);
+    border-top: 1px solid rgba(180,130,230,0.15);
+    border-bottom: 1px solid rgba(180,130,230,0.15);
+  }
+  .stat-item + .stat-item::before { background: rgba(180,130,230,0.2); }
+  .stat-num { color: var(--plum-pale); }
+  .stat-label { color: rgba(212,168,240,0.45); }
+
+  /* Marquee strip stays gold — nice contrast on plum */
+  .marquee-strip { background: linear-gradient(90deg, #A0640A, var(--gold), #A0640A); }
+
+  /* Kolam border — shift to plum tint */
+  .kolam-border {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='36'%3E%3Cpath d='M0 18 L12 6 L24 18 L12 30 Z' fill='none' stroke='%23C89AE8' stroke-width='1' opacity='0.35'/%3E%3Cpath d='M24 18 L36 6 L48 18 L36 30 Z' fill='none' stroke='%23C89AE8' stroke-width='1' opacity='0.35'/%3E%3Cpath d='M48 18 L60 6 L72 18 L60 30 Z' fill='none' stroke='%23C89AE8' stroke-width='1' opacity='0.35'/%3E%3Cpath d='M72 18 L84 6 L96 18 L84 30 Z' fill='none' stroke='%23C89AE8' stroke-width='1' opacity='0.35'/%3E%3Cpath d='M96 18 L108 6 L120 18 L108 30 Z' fill='none' stroke='%23C89AE8' stroke-width='1' opacity='0.35'/%3E%3Ccircle cx='24' cy='18' r='2' fill='%23C89AE8' opacity='0.5'/%3E%3Ccircle cx='48' cy='18' r='2' fill='%23C89AE8' opacity='0.5'/%3E%3Ccircle cx='72' cy='18' r='2' fill='%23C89AE8' opacity='0.5'/%3E%3Ccircle cx='96' cy='18' r='2' fill='%23C89AE8' opacity='0.5'/%3E%3C/svg%3E");
+    background-color: var(--plum-deep);
+  }
+
+  /* ── Global smoke pseudo-elements for sections ── */
+  /* About section smoke */
+  #about::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -100px;
+    width: 550px; height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(160,80,210,0.2) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    animation: smokeFloat1 16s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  #about::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(100,40,160,0.18) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    animation: smokeFloat2 20s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  #about .container { position: relative; z-index: 1; }
+
+  /* Guru section smoke */
+  #guru::before {
+    content: '';
+    position: absolute;
+    top: 10%; left: -100px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(140,60,200,0.22) 0%, transparent 70%);
+    filter: blur(55px);
+    pointer-events: none;
+    animation: smokeFloat3 18s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  #guru::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: -120px;
+    width: 520px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(80,30,130,0.25) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    animation: smokeFloat1 22s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+  }
+  #guru .container { position: relative; z-index: 1; }
+
+  /* Shishya section smoke */
+  #shishya::before {
+    background:
+      radial-gradient(ellipse 70% 60% at 10% 20%, rgba(160,80,220,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 90% 80%, rgba(80,20,140,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(200,140,255,0.1) 0%, transparent 70%);
+    animation: smokeDrift 14s ease-in-out infinite alternate;
+  }
+  #shishya .container { position: relative; z-index: 1; }
+
+  /* Thanks section smoke */
+  #thanks::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -60px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(150,70,210,0.18) 0%, transparent 70%);
+    filter: blur(55px);
+    pointer-events: none;
+    animation: smokeFloat2 19s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  #thanks::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -80px;
+    width: 440px; height: 440px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(90,30,150,0.2) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    animation: smokeFloat3 25s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+  }
+  #thanks .container { position: relative; z-index: 1; }
+
+  /* Gallery dark plum */
+  #gallery {
+    background: var(--plum-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  #gallery::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 40%, rgba(140,60,200,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 60% at 75% 65%, rgba(80,20,130,0.25) 0%, transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: smokeDrift 16s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  #gallery .container { position: relative; z-index: 1; }
+  #gallery .eyebrow { color: var(--plum-pale); }
+  #gallery .section-title { color: var(--plum-dust); }
+  #gallery .ornament-line { background: linear-gradient(90deg, transparent, var(--plum-pale)); }
+  #gallery .ornament-line.r { background: linear-gradient(90deg, var(--plum-pale), transparent); }
+  #gallery .ornament-diamond { background: var(--plum-pale); }
+
+  /* Gallery CTA card plum version */
+  .gallery-cta-inner {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(200,160,240,0.25);
+    box-shadow: 0 20px 60px rgba(40,10,70,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .gallery-cta-inner:hover {
+    border-color: rgba(200,160,240,0.5);
+    background: rgba(255,255,255,0.07);
+  }
+  .gallery-cta-label { color: var(--plum-pale); }
+  .gallery-cta-title { color: var(--plum-dust); }
+  .gallery-cta-text  { color: rgba(212,168,240,0.6); }
+  .gallery-cta-note  { color: rgba(212,168,240,0.3); }
+  .gallery-cta-icon svg rect,
+  .gallery-cta-icon svg circle,
+  .gallery-cta-icon svg path,
+  .gallery-cta-icon svg polyline { stroke: var(--plum-pale); }
+
+  /* ── Section text colours for plum bg ── */
+  #about .section-title, #guru .section-title, #thanks .section-title { color: var(--plum-dust); }
+  #about .eyebrow, #guru .eyebrow, #thanks .eyebrow { color: var(--plum-pale); }
+  #about .section-line, #guru .section-line, #thanks .section-line {
+    background: linear-gradient(90deg, transparent, var(--plum-pale), transparent);
+  }
+  #about .ornament-line { background: linear-gradient(90deg, transparent, var(--plum-pale)); }
+  #about .ornament-line.r { background: linear-gradient(90deg, var(--plum-pale), transparent); }
+  #about .ornament-diamond,
+  #guru  .ornament-diamond,
+  #thanks .ornament-diamond { background: var(--plum-pale); }
+  #guru  .ornament-line { background: linear-gradient(90deg, transparent, var(--plum-pale)); }
+  #guru  .ornament-line.r { background: linear-gradient(90deg, var(--plum-pale), transparent); }
+  #thanks .ornament-line { background: linear-gradient(90deg, transparent, var(--plum-pale)); }
+  #thanks .ornament-line.r { background: linear-gradient(90deg, var(--plum-pale), transparent); }
+
+  /* About text */
+  .about-text p { color: rgba(212,168,240,0.75); }
+  .about-pull {
+    color: var(--plum-dust);
+    border-left-color: var(--plum-pale);
+  }
+
+  /* Person card text */
+  .person-name { color: var(--plum-dust); }
+  .person-bio   { color: rgba(212,168,240,0.75); }
+  #shishya .person-name { color: var(--plum-dust); }
+  #shishya .person-bio  { color: rgba(212,168,240,0.75); }
+  #shishya .eyebrow     { color: var(--plum-pale); }
+
+  /* Person label overlay */
+  .person-label { background: linear-gradient(0deg, rgba(30,10,46,0.9) 0%, transparent 100%); }
+
+  /* Details section */
+  #details {
+    background: var(--plum-mid);
+    position: relative;
+    overflow: hidden;
+  }
+  #details::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(180,100,240,0.2) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    animation: smokeFloat3 15s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  #details .container { position: relative; z-index: 1; }
+  #details .section-tag { color: var(--plum-pale); }
+  #details .section-title { color: var(--plum-dust); }
+  #details .section-line { background: linear-gradient(90deg, transparent, var(--plum-pale), transparent); }
+  .detail-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(180,130,230,0.2);
+  }
+  .detail-card:hover { background: rgba(180,130,230,0.1); }
+  .detail-label { color: var(--plum-pale); }
+  .detail-value { color: var(--plum-dust); }
+  .detail-sub   { color: rgba(212,168,240,0.45); }
+
+  /* Details SVG icons — restyle to plum */
+  .detail-icon svg rect,
+  .detail-icon svg circle,
+  .detail-icon svg path,
+  .detail-icon svg line,
+  .detail-icon svg polyline { stroke: var(--plum-pale); }
+  .detail-icon svg rect[fill],
+  .detail-icon svg path[fill="#E8B84B"] { fill: rgba(180,130,230,0.7); }
+
+  /* Thanks cards */
+  .thanks-dept-card {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(180,130,230,0.18);
+  }
+  .thanks-dept-card:hover {
+    border-color: rgba(180,130,230,0.45);
+    box-shadow: 0 6px 28px rgba(80,20,140,0.3);
+  }
+  .thanks-dept-title { color: var(--plum-pale); }
+  .thanks-dept-names { color: rgba(212,168,240,0.8); }
+  .thanks-special {
+    background: var(--plum-mid);
+    border: 1px solid rgba(180,130,230,0.2);
+    color: var(--plum-dust);
+  }
+  .thanks-special .eyebrow { color: var(--plum-pale); }
+
+  /* Footer */
+  footer {
+    background: var(--plum-deep);
+    border-top: 1px solid rgba(180,130,230,0.12);
+  }
+  .footer-name    { color: var(--plum-pale); }
+  .footer-sub     { color: rgba(212,168,240,0.35); }
+  .footer-line    { background: rgba(180,130,230,0.3); }
+  .footer-contact { color: rgba(212,168,240,0.45); }
+  .footer-contact a { color: var(--plum-pale); }
+  .footer-copy    { color: rgba(212,168,240,0.18); }
+
+  /* Floating RSVP chip — keep gold for visibility */
+  #rsvp-chip {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    color: var(--plum-deep);
+    box-shadow: 0 6px 28px rgba(200,146,42,0.45);
+  }
+  #rsvp-chip:hover { box-shadow: 0 10px 36px rgba(200,146,42,0.6); }
+
+  /* Scroll cue */
+  .scroll-cue span { color: var(--plum-pale); }
+
+  /* Hero pills */
+  .hero-pill {
+    border-color: rgba(180,130,230,0.4);
+    background: rgba(180,130,230,0.1);
+  }
+
+  /* ── SHISHYA — center Andrea's photo ── */
+  #shishya .person-card.reverse {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  #shishya .person-card.reverse .person-image,
+  #shishya .person-card.reverse .person-text { order: unset; }
+
+  /* Photo first on mobile AND desktop for shishya */
+  #shishya .person-card.reverse { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; }
+  #shishya .person-text { text-align: center; max-width: 600px; }
+  #shishya .bells-ornament { justify-content: center !important; }
+  #shishya .ornament { justify-content: center; }
+  #shishya .shishya-portrait { max-width: 340px; margin: 0 auto; }
+
+  @media (min-width: 901px) {
+    #shishya .person-card.reverse {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   </style>
 </head>
 <body>
@@ -1086,7 +1864,7 @@
   </svg>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">A Grand Celebration of Classical Dance</p>
+    <p class="hero-eyebrow">Nrityalaya School of Dance Presents</p>
 
     <h1 class="hero-title">
       Andrea's Arangettam
@@ -1115,11 +1893,23 @@
       </div>
     </div>
 
-    <div class="hero-cta" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-      <a href="https://evite.me/2Zmtxaw6NR" target="_blank" rel="noopener noreferrer" class="btn btn-gold">
-        Please RSVP&nbsp;→
+    <!-- Countdown timer -->
+    <div class="hero-countdown" id="countdown">
+      <div class="cdown-item"><span class="cdown-num" id="cd-days">--</span><span class="cdown-label">Days</span></div>
+      <div class="cdown-sep">:</div>
+      <div class="cdown-item"><span class="cdown-num" id="cd-hours">--</span><span class="cdown-label">Hours</span></div>
+      <div class="cdown-sep">:</div>
+      <div class="cdown-item"><span class="cdown-num" id="cd-mins">--</span><span class="cdown-label">Mins</span></div>
+    </div>
+
+    <!-- RSVP dominant CTA -->
+    <div class="hero-cta">
+      <a href="https://evite.me/2Zmtxaw6NR" target="_blank" rel="noopener noreferrer" class="btn-rsvp-hero">
+        <span class="btn-rsvp-ping"></span>
+        <span class="btn-rsvp-text">Please RSVP Now</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#about" class="btn btn-primary">Explore</a>
+      <p class="hero-rsvp-note">Please RSVP</p>
     </div>
   </div>
 
@@ -1131,16 +1921,7 @@
 
 <div class="kolam-border"></div>
 
-<!-- RSVP Sticky Banner -->
-<div id="rsvp-banner" style="background:linear-gradient(135deg,var(--maroon-deep),var(--maroon));padding:1rem 1.5rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;border-bottom:1px solid rgba(200,146,42,0.2);">
-  <p style="color:var(--gold-pale);font-family:var(--font-serif);font-style:italic;font-size:1rem;margin:0;">
-    🎉 &nbsp;Join us on <strong style="color:var(--gold-light);font-style:normal;">June 27, 2026 at 3 PM</strong> — Shorewood Performing Center, Shoreline WA
-  </p>
-  <a href="https://evite.me/2Zmtxaw6NR" target="_blank" rel="noopener noreferrer"
-     style="display:inline-block;padding:0.6rem 1.8rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--maroon-deep);border-radius:100px;font-family:var(--font-body);font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;">
-    Please RSVP →
-  </a>
-</div>
+
 
 
 <!-- ═══════════════════════════════════════════════════
@@ -1312,37 +2093,38 @@
         <div class="ornament-diamond"></div>
         <div class="ornament-line r" style="max-width:50px;"></div>
       </div>
-      <p style="font-family:var(--font-serif);font-style:italic;color:var(--text-soft);margin-top:0.5rem;font-size:0.95rem;">A collection of moments from Andrea's journey</p>
     </div>
 
-    <!-- Local preview grid -->
-    <div class="gallery-grid reveal" style="margin-top:2rem;">
-      <div class="gallery-item" style="cursor:default;">
-        <img src="" alt="Andrea Chalissery — Arangettam" />
-        <div class="gallery-overlay"><span>Andrea · Arangettam</span></div>
+    <!-- Amazon Photos CTA card -->
+    <div class="gallery-cta-card reveal">
+      <div class="gallery-cta-inner">
+        <div class="gallery-cta-icon">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="10" width="44" height="32" rx="4" stroke="#C8922A" stroke-width="1.5"/>
+            <circle cx="18" cy="22" r="5" stroke="#C8922A" stroke-width="1.5"/>
+            <path d="M4 34 L15 24 L22 31 L31 21 L48 36" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="40" cy="16" r="4" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="1.5"/>
+            <path d="M38 16h4M40 14v4" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="gallery-cta-label">Photo Collection</p>
+        <h3 class="gallery-cta-title">View Andrea's Arangettam Gallery</h3>
+        <p class="gallery-cta-text">
+          Browse the complete collection of photographs from the event — candid moments, classical poses, and memories to last a lifetime.
+        </p>
+        <a
+          href="https://www.amazon.com/photos/shared/MwGjbmdpR869xrhYaVJbXg.zlfgBKWMFMITihqWTN4_WB?pageIndex=0"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-gold gallery-cta-btn"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Open Full Gallery
+        </a>
+        <p class="gallery-cta-note">Opens in Amazon Photos · No account required to view</p>
       </div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=700&q=80" alt="Abhinaya" loading="lazy"/><div class="gallery-overlay"><span>Abhinaya</span></div></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=700&q=80" alt="Performance" loading="lazy"/><div class="gallery-overlay"><span>Performance</span></div></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=500&q=80" alt="Practice" loading="lazy"/><div class="gallery-overlay"><span>Practice</span></div></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=500&q=80" alt="Tradition" loading="lazy"/><div class="gallery-overlay"><span>Tradition</span></div></div>
-      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517457210348-703079e57d4b?w=500&q=80" alt="Celebration" loading="lazy"/><div class="gallery-overlay"><span>Celebration</span></div></div>
     </div>
 
-    <!-- View full gallery CTA -->
-    <div class="text-center reveal" style="margin-top:2.8rem;">
-      <p style="font-family:var(--font-serif);font-style:italic;color:var(--text-mid);font-size:1rem;margin-bottom:1.5rem;">
-        View the complete photo collection on Amazon Photos
-      </p>
-      <a
-        href="https://www.amazon.com/photos/shared/MwGjbmdpR869xrhYaVJbXg.zlfgBKWMFMITihqWTN4_WB?pageIndex=0"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-primary"
-        style="font-size:0.9rem;"
-      >
-        View Full Gallery &nbsp;→
-      </a>
-    </div>
   </div>
 </section>
 
@@ -1430,7 +2212,7 @@
       <div class="thanks-dept-card">
         <div class="thanks-dept-icon">🎥</div>
         <div class="thanks-dept-title">Videography &amp; Streaming</div>
-        <div class="thanks-dept-names">Papaya Plus, AK Focus &amp; Joshua Ojus</div>
+        <div class="thanks-dept-names">Papaya Plus, AK Focus, Vinod Menon &amp; Joshua Ojus</div>
       </div>
 
       <div class="thanks-dept-card">
@@ -1505,6 +2287,9 @@
      RSVP
 ═══════════════════════════════════════════════════ -->
 <section id="rsvp">
+  <div class="rsvp-smoke rsvp-smoke-1" aria-hidden="true"></div>
+  <div class="rsvp-smoke rsvp-smoke-2" aria-hidden="true"></div>
+  <div class="rsvp-smoke rsvp-smoke-3" aria-hidden="true"></div>
   <div class="container">
     <div class="rsvp-box reveal">
       <span class="rsvp-decorative">💌</span>
@@ -1525,7 +2310,7 @@
           Currently set to "#" as a placeholder.
       -->
       <a
-        href="#"
+        href="https://evite.me/2Zmtxaw6NR"
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn-gold"
@@ -1552,7 +2337,7 @@
   <!-- ▼ REPLACE with actual contact details -->
   <div class="footer-contact">
     <p>Nrityalaya School of Dance &nbsp;·&nbsp; Washington, USA</p>
-    <p>For enquiries: <a href="mailto:your@email.com">contact@nrityalaya.com</a></p>
+    <p>For enquiries, reach out to Jojo / Femy &nbsp;·&nbsp; <a href="tel:4252155396">425-215-5396</a> &nbsp;·&nbsp; <a href="mailto:jo_chali@hotmail.com">jo_chali@hotmail.com</a></p>
   </div>
 
   <p class="footer-copy">&copy; 2026 Andrea's Arangettam &mdash; All Rights Reserved</p>
@@ -1662,7 +2447,48 @@ document.addEventListener('keydown', (e) => {
 document.getElementById('rsvp-btn').addEventListener('click', function(e) {
   // RSVP link is live
 });
+
+/* ── Countdown timer ─────────────────────────── */
+(function() {
+  const target = new Date('2026-06-27T15:00:00-07:00');
+  function tick() {
+    const now  = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      const cd = document.getElementById('countdown');
+      if(cd) cd.innerHTML = '<p style="color:var(--gold-pale);font-style:italic;font-family:var(--font-serif);">The celebration has begun! 🎉</p>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const pad = n => String(n).padStart(2,'0');
+    const dEl = document.getElementById('cd-days');
+    const hEl = document.getElementById('cd-hours');
+    const mEl = document.getElementById('cd-mins');
+    if(dEl) dEl.textContent = pad(d);
+    if(hEl) hEl.textContent = pad(h);
+    if(mEl) mEl.textContent = pad(m);
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+
+/* ── Floating RSVP chip show/hide ────────────── */
+const rsvpChip = document.getElementById('rsvp-chip');
+const heroSec  = document.getElementById('home');
+if (rsvpChip && heroSec) {
+  new IntersectionObserver((entries) => {
+    rsvpChip.classList.toggle('visible', !entries[0].isIntersecting);
+  }, { threshold: 0.1 }).observe(heroSec);
+}
 </script>
+
+<!-- Floating RSVP chip -->
+<a href="https://evite.me/2Zmtxaw6NR" target="_blank" rel="noopener noreferrer" id="rsvp-chip" aria-label="RSVP Now">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+  RSVP
+</a>
 
 </body>
 </html>
