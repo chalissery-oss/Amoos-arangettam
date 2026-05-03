@@ -2259,9 +2259,16 @@ if (rsvpChip && heroSec) {
 
 
 <!-- ═══════ AMBIENT MUSIC PLAYER ═══════ -->
-<audio id="bg-music" loop preload="none">
-  <source src="music.mp3" type="audio/mpeg" />
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+window.addEventListener("click", () => {
+  const audio = document.getElementById("bg-music");
+  audio.play();
+}, { once: true });
+</script>
 
 <div id="music-player" role="region" aria-label="Ambient music player">
   <button id="music-btn" aria-label="Play ambient music" title="Play / Pause">
