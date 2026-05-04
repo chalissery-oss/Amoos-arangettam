@@ -435,7 +435,7 @@
   .marquee-track span.dot { color: var(--plum-soft); padding: 0; letter-spacing: 0; font-size: 0.5rem; }
 
   .stats-bar {
-    background: var(--plum-mid); padding: 2rem 1.5rem; overflow: hidden;
+    background: var(--plum-deepest); padding: 2rem 1.5rem; overflow: hidden;
     border-top: 1px solid rgba(180,130,230,0.15);
     border-bottom: 1px solid rgba(180,130,230,0.15);
   }
@@ -464,7 +464,7 @@
   ═══════════════════════════════════════════════════════ */
   #details {
     padding: var(--section-pad) 0;
-    background: var(--plum-dark); position: relative; overflow: hidden;
+    background: var(--plum-deepest); position: relative; overflow: hidden;
     isolation: isolate;
   }
   #details::before {
@@ -508,7 +508,7 @@
   ═══════════════════════════════════════════════════════ */
   #about {
     padding: var(--section-pad) 0;
-    background: var(--plum-dark); position: relative; overflow: hidden; isolation: isolate;
+    background: var(--plum-deepest); position: relative; overflow: hidden; isolation: isolate;
   }
   #about::before {
     content: ''; position: absolute;
@@ -526,14 +526,14 @@
   }
   #about .container { position: relative; z-index: 1; }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .about-image-frame { position: relative; }
+  .about-image-frame { position: relative; max-width: 420px; width: 100%; margin: 0 auto; }
   .about-image-frame::before {
     content: ''; position: absolute;
     inset: -12px -12px 12px 12px;
     border: 1.5px solid rgba(180,130,230,0.35);
     border-radius: var(--radius); pointer-events: none;
   }
-  .about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); overflow: hidden; }
+  .about-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: var(--radius); overflow: hidden; }
     .about-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; border-radius: var(--radius); }
   .about-text p { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.95; color: rgba(212,168,240,0.75); margin-bottom: 1.1rem; }
   .about-pull { font-family: var(--font-display); font-size: 1.3rem; font-style: italic; color: var(--plum-dust); border-left: 3px solid var(--plum-pale); padding: 0.4rem 1.2rem; margin: 1.5rem 0; line-height: 1.55; }
@@ -543,7 +543,7 @@
   ═══════════════════════════════════════════════════════ */
   #guru {
     padding: var(--section-pad) 0;
-    background: var(--plum-deep); position: relative; overflow: hidden; isolation: isolate;
+    background: var(--plum-deepest); position: relative; overflow: hidden; isolation: isolate;
   }
   #guru::before {
     content: ''; position: absolute;
@@ -590,7 +590,7 @@
   ═══════════════════════════════════════════════════════ */
   #shishya {
     padding: var(--section-pad) 0;
-    background: var(--plum-mid); position: relative; overflow: hidden; isolation: isolate;
+    background: var(--plum-deepest); position: relative; overflow: hidden; isolation: isolate;
   }
   #shishya::before {
     content: ''; position: absolute; inset: 0;
@@ -707,7 +707,7 @@
   ═══════════════════════════════════════════════════════ */
   #thanks {
     padding: var(--section-pad) 0;
-    background: var(--plum-dark); position: relative; overflow: hidden; isolation: isolate;
+    background: var(--plum-deepest); position: relative; overflow: hidden; isolation: isolate;
   }
   #thanks::before {
     content: ''; position: absolute;
@@ -724,12 +724,23 @@
     animation: smokeFloat3 26s ease-in-out infinite alternate-reverse; z-index: 0;
   }
   #thanks .container { position: relative; z-index: 1; }
-  .thanks-dept-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 1rem; margin-top: 0.5rem; }
+  .thanks-dept-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+  }
   .thanks-dept-card {
-    background: rgba(160,80,220,0.06);
+    background: rgba(160,80,220,0.07);
     border: 1px solid rgba(180,130,230,0.18);
-    border-radius: var(--radius); padding: 1.4rem 1.3rem;
+    border-radius: var(--radius);
+    padding: 1.2rem 1rem;
     cursor: default;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
   }
   /* Thanks dept cards are display only - no hover effects */
   .thanks-dept-icon  { font-size: 1.4rem; margin-bottom: 0.5rem; }
@@ -750,7 +761,7 @@
   ═══════════════════════════════════════════════════════ */
   #rsvp {
     padding: var(--section-pad) 0;
-    background: #2A0E40; position: relative; overflow: hidden; isolation: isolate;
+    background: var(--plum-deepest); position: relative; overflow: hidden; isolation: isolate;
   }
   #rsvp::before {
     content: ''; position: absolute; inset: 0;
@@ -835,8 +846,8 @@
   @media (max-width: 900px) {
     /* About section */
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .about-image-frame { max-width: 100%; margin: 0 auto; }
-    .about-img { aspect-ratio: 16/9; }
+    .about-image-frame { max-width: 380px; margin: 0 auto; }
+    .about-img { aspect-ratio: 3/4; max-width: 380px; margin: 0 auto; }
     .about-img img { object-position: center 20%; }
 
     /* Person cards (Guru) */
@@ -885,7 +896,7 @@
     .about-pull { font-size: 1.1rem; }
 
     /* Thanks grid — 2 per row */
-    .thanks-dept-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .thanks-dept-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
     .thanks-dept-card { padding: 0.9rem 0.8rem; }
     .thanks-dept-icon { font-size: 1.1rem; margin-bottom: 0.35rem; }
     .thanks-dept-title { font-size: 0.6rem; }
@@ -895,6 +906,9 @@
     /* Shishya */
     .shishya-portrait { max-width: 280px; }
     .shishya-center-wrap { gap: 1.8rem; }
+
+    /* Thanks grid — 3 columns at 900px */
+    .thanks-dept-grid { grid-template-columns: repeat(3, 1fr); }
 
     /* Gallery */
     .gallery-cta-title { font-size: 1.3rem; }
@@ -1315,6 +1329,8 @@
     .gallery-tile { aspect-ratio: 4/3; }
     .gallery-tile-overlay { opacity: 1; }
     .gallery-tile-zoom { width: 36px; height: 36px; }
+    /* Thanks grid — 2 columns at 640px */
+    .thanks-dept-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
   }
 
   /* ── Lightbox ── */
@@ -2155,7 +2171,7 @@ if (rsvpChip && heroSec) {
   }, { threshold: 0.1 }).observe(heroSec);
 }
 
-/* ── Ambient music player ─────────────────────── */
+/* ── Ambient music player — auto-plays at low volume on load ── */
 (function() {
   const audio     = document.getElementById('bg-music');
   const btn       = document.getElementById('music-btn');
@@ -2167,41 +2183,71 @@ if (rsvpChip && heroSec) {
 
   if (!audio || !btn) return;
 
-  audio.volume = 0.30;
+  // Very low ambient volume (0.08 = ~8%)
+  const AMBIENT_VOL = 0.08;
+  audio.volume = AMBIENT_VOL;
 
-  // Show player after 1.5s
-  setTimeout(() => player.classList.add('visible'), 1500);
+  function setPlaying() {
+    playIcon.style.display  = 'none';
+    pauseIcon.style.display = 'block';
+    wave.classList.add('playing');
+    btn.setAttribute('aria-label', 'Pause music');
+  }
+  function setPaused() {
+    playIcon.style.display  = 'block';
+    pauseIcon.style.display = 'none';
+    wave.classList.remove('playing');
+    btn.setAttribute('aria-label', 'Play music');
+  }
 
   // Update volume slider gradient fill
   function updateVol(val) {
-    volSlider.style.setProperty('--vol', Math.round(val * 100) + '%');
+    if (volSlider) volSlider.style.setProperty('--vol', Math.round(val * 100) + '%');
   }
-  updateVol(0.30);
+  updateVol(AMBIENT_VOL);
 
-  // Play / pause
-  btn.addEventListener('click', function() {
+  // Show player after 1s
+  setTimeout(() => player && player.classList.add('visible'), 1000);
+
+  // Auto-play on first user interaction anywhere on the page
+  function tryAutoplay() {
+    if (!audio.paused) return; // already playing
+    audio.play().then(() => {
+      setPlaying();
+    }).catch(() => {/* blocked — user can click the button */});
+  }
+
+  // Attempt on page load (works in some browsers)
+  document.addEventListener('DOMContentLoaded', function() {
+    audio.play().then(() => {
+      setPlaying();
+    }).catch(() => {
+      // If blocked, try on first user gesture
+      document.addEventListener('click',    tryAutoplay, { once: true });
+      document.addEventListener('touchend', tryAutoplay, { once: true });
+      document.addEventListener('keydown',  tryAutoplay, { once: true });
+    });
+  });
+
+  // Manual play/pause button
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation(); // don't trigger the tryAutoplay listener
     if (audio.paused) {
-      audio.play().then(() => {
-        playIcon.style.display  = 'none';
-        pauseIcon.style.display = 'block';
-        wave.classList.add('playing');
-        btn.setAttribute('aria-label', 'Pause music');
-      }).catch(e => console.warn('Autoplay blocked — user interaction required:', e));
+      audio.play().then(setPlaying).catch(() => {});
     } else {
       audio.pause();
-      playIcon.style.display  = 'block';
-      pauseIcon.style.display = 'none';
-      wave.classList.remove('playing');
-      btn.setAttribute('aria-label', 'Play music');
+      setPaused();
     }
   });
 
-  // Volume
-  volSlider.addEventListener('input', function() {
-    const v = parseFloat(this.value);
-    audio.volume = v;
-    updateVol(v);
-  });
+  // Volume slider
+  if (volSlider) {
+    volSlider.addEventListener('input', function() {
+      const v = parseFloat(this.value);
+      audio.volume = v;
+      updateVol(v);
+    });
+  }
 })();
 
 
@@ -2259,16 +2305,9 @@ if (rsvpChip && heroSec) {
 
 
 <!-- ═══════ AMBIENT MUSIC PLAYER ═══════ -->
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+<audio id="bg-music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg" />
 </audio>
-
-<script>
-window.addEventListener("click", () => {
-  const audio = document.getElementById("bg-music");
-  audio.play();
-}, { once: true });
-</script>
 
 <div id="music-player" role="region" aria-label="Ambient music player">
   <button id="music-btn" aria-label="Play ambient music" title="Play / Pause">
