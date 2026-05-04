@@ -231,7 +231,8 @@
     letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(212,168,240,0.65); transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--plum-pale); }
+  .nav-links a:hover,
+  .nav-links .nav-link:hover { color: var(--plum-pale); }
   .hamburger {
     display: none; flex-direction: column;
     gap: 5px; background: none; border: none; padding: 4px;
@@ -255,16 +256,19 @@
   }
   .nav-drawer.open { transform: translateY(0); opacity: 1; }
   .nav-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
-  .nav-drawer ul li a {
+  .nav-drawer ul li a,
+  .nav-drawer ul li .mobile-nav-link {
     display: block; padding: 0.85rem 0;
     font-size: 0.85rem; font-weight: 500;
     letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--plum-pale);
     border-bottom: 1px solid rgba(180,130,230,0.1);
     transition: color 0.2s, padding-left 0.2s;
+    cursor: pointer;
   }
   .nav-drawer ul li:last-child a { border-bottom: none; }
-  .nav-drawer ul li a:hover { color: var(--plum-dust); padding-left: 0.5rem; }
+  .nav-drawer ul li a:hover,
+  .nav-drawer ul li .mobile-nav-link:hover { color: var(--plum-dust); padding-left: 0.5rem; }
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
@@ -1421,14 +1425,14 @@
 ═══════════════════════════════════════════════════ -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#home" class="nav-brand"><span>Andrea's</span> Arangettam</a>
+    <span class="nav-brand"><span>Andrea's</span> Arangettam</a>
     <ul class="nav-links">
-      <li><a href="#about">Bharatanatyam</a></li>
-      <li><a href="#guru">Guru</a></li>
-      <li><a href="#shishya">Shishya</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#thanks">Thanks</a></li>
-      <li><a href="#rsvp">RSVP</a></li>
+      <li><span class="nav-link" onclick="scrollTo('about')">Bharatanatyam</span></li>
+      <li><span class="nav-link" onclick="scrollTo('guru')">Guru</span></li>
+      <li><span class="nav-link" onclick="scrollTo('shishya')">Shishya</span></li>
+      <li><span class="nav-link" onclick="scrollTo('gallery')">Gallery</span></li>
+      <li><span class="nav-link" onclick="scrollTo('thanks')">Thanks</span></li>
+      <li><span class="nav-link" onclick="scrollTo('rsvp')">RSVP</span></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1439,12 +1443,12 @@
 <!-- Mobile drawer -->
 <nav class="nav-drawer" id="navDrawer" aria-hidden="true">
   <ul>
-    <li><a href="#about"   onclick="closeNav()">Bharatanatyam</a></li>
-    <li><a href="#guru"    onclick="closeNav()">Guru</a></li>
-    <li><a href="#shishya" onclick="closeNav()">Shishya</a></li>
-    <li><a href="#gallery" onclick="closeNav()">Gallery</a></li>
-    <li><a href="#thanks"  onclick="closeNav()">Special Thanks</a></li>
-    <li><a href="#rsvp"    onclick="closeNav()">RSVP</a></li>
+    <li><span class="mobile-nav-link" onclick="scrollTo('about');closeNav()">Bharatanatyam</span></li>
+    <li><span class="mobile-nav-link" onclick="scrollTo('guru');closeNav()">Guru</span></li>
+    <li><span class="mobile-nav-link" onclick="scrollTo('shishya');closeNav()">Shishya</span></li>
+    <li><span class="mobile-nav-link" onclick="scrollTo('gallery');closeNav()">Gallery</span></li>
+    <li><span class="mobile-nav-link" onclick="scrollTo('thanks');closeNav()">Special Thanks</span></li>
+    <li><span class="mobile-nav-link" onclick="scrollTo('rsvp');closeNav()">RSVP</span></li>
   </ul>
 </nav>
 
@@ -2027,7 +2031,7 @@
   <!-- ▼ REPLACE with actual contact details -->
   <div class="footer-contact">
     <p>Nrityalaya School of Dance &nbsp;·&nbsp; Washington, USA</p>
-    <p>For enquiries, reach out to Jojo / Femy &nbsp;·&nbsp; <a href="tel:4252155396">425-215-5396</a> &nbsp;·&nbsp; <a href="mailto:jo_chali@hotmail.com">jo_chali@hotmail.com</a></p>
+    <p>For enquiries, reach out to Jojo / Femy &nbsp;·&nbsp; <span>425-215-5396</span> &nbsp;·&nbsp; <span>jo_chali@hotmail.com</span></p>
   </div>
 
   <p class="footer-copy">&copy; 2026 Andrea's Arangettam &mdash; All Rights Reserved</p>
@@ -2038,6 +2042,12 @@
      JAVASCRIPT
 ═══════════════════════════════════════════════════ -->
 <script>
+
+/* ── Nav smooth scroll helper ──────────────────── */
+function scrollTo(sectionId) {
+  var el = document.getElementById(sectionId);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 /* ── Navigation ───────────────────────────────── */
 const hamburger  = document.getElementById('hamburger');
 const navDrawer  = document.getElementById('navDrawer');
